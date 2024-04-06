@@ -25,26 +25,29 @@
 ; (get-next-generation '(1 0 0 1 0 1 0 ) 77) => (1 1 1 0 1 0 0)
 
 (defun get-next-generation (generation rule)
-  ; Create a new list for the next generation
-  ; The first element is a copy of the first element in the original list
-  (let ((next-gen (list (car generation))))
+  ; Calculate the first element of the next generation
+  (let ((next-gen (list (get-cell-value (car (last generation)) (car generation) (cadr generation) rule))))
     ; Apply the get-cell-value function to the next n - 1 elements of the generation list
     (setf next-gen (append next-gen
                            (mapcar #'(lambda (left cell right)
-                                       (format t "Left: ~A, Current: ~A, Right: ~A~%" left cell right)
+                                       ;(format t "Left: ~A, Current: ~A, Right: ~A~%" left cell right)
                                        (get-cell-value left cell right rule))
                                    generation ; use the whole generation list for left neighbors
                                    (cdr generation) ; start from the second element for current cells
                                    (cddr generation)))) ; start from the third element for right neighbors
-    ; Append the last element of the generation list to next-gen
-    (setf next-gen (append next-gen (list (car (last generation)))))
+    ; Calculate the last element of the next generation
+    (setf next-gen (append next-gen (list (get-cell-value (car (last (butlast generation))) (car (last generation)) (car generation) rule))))
     next-gen
   )
 )
 
+(defun print-generations (initial-generation rule num-generations)
+  (loop :for i :below num-generations :do
+    (setq initial-generation (get-next-generation initial-generation rule))
+    (loop :for cell :in initial-generation :do
+      (princ (if (= cell 1) "*" " "))
+      (princ " "))
+    (terpri)))
 
-
-
-
-
+          
 

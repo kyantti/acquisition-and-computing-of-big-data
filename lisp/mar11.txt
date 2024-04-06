@@ -1,0 +1,8 @@
+funciones anonimas -> lambda
+
+;Ejemplo volument cilindro
+
+(defun lvolumen (LR LM )
+       (mapcar (lambda (R H)
+              (* 3,14 R R H))
+              LR LH))

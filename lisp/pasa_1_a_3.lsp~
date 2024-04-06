@@ -1,0 +1,8 @@
+(defun move-first-to-third (lst)
+  "Moves the first element from a list to the third position."
+  (if (>= (length lst) 3)
+      (let ((first-elem (car lst))
+            (rest (cdr lst)))
+        (cons (car rest)
+              (cons first-elem (cdr rest))))
+      lst))

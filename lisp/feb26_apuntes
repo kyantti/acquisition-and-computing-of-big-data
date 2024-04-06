@@ -1,0 +1,20 @@
+Los predicados son funciones que devuelven verdadero o falso
+
+Listp pregunta si algo es una lista.
+
+(listp '(a b c)) -> t
+(listp 'a) -> nil
+(listp )
+
+numberp preungta si algo es un número.
+
+atomp pregunta si es un atomo.
+
+simbolp pregunta si es un literal.
+
+and, or, not
+
+(and (> a 100)
+     (< a 200)
+     (not (= a 150))
+)
